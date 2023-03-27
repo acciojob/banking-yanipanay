@@ -6,7 +6,13 @@ public class BankAccount {
     private double balance;
     private double minBalance;
 
+
+
     public BankAccount(String name, double balance, double minBalance) {
+
+        name = this.name;
+        balance = this.balance;
+        minBalance = this.minBalance;
 
     }
 
@@ -15,17 +21,69 @@ public class BankAccount {
         //Generate account number having given number of 'digits' such that the sum of digits is equal to 'sum'
         //If it is not possible, throw "Account Number can not be generated" exception
 
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        if(sum > digits*9) throw new Exception("Account Number can not be generated");
+
+        else {
+                int acNo =0;
+                while(digits>0){
+                    if(sum>9){
+                       sb.append('9');
+                        sum-=9;
+                        digits--;
+                    }else{
+                        sb.append(sum);
+                        digits--;
+                        sum=0;
+                    }
+                }
+        }
+        return sb.toString();
     }
 
     public void deposit(double amount) {
         //add amount to balance
 
+        double bal = balance;
+
+        bal+=amount;
+
+        balance = bal;
     }
 
     public void withdraw(double amount) throws Exception {
         // Remember to throw "Insufficient Balance" exception, if the remaining amount would be less than minimum balance
 
+        if (balance-amount<minBalance) throw new Exception("Insufficient Balance");
+
+        else balance = balance-amount;
+
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public double getMinBalance() {
+        return minBalance;
+    }
+
+    public void setMinBalance(double minBalance) {
+        this.minBalance = minBalance;
+    }
+
 
 }
